@@ -72,6 +72,42 @@ RSpec.describe "format" do
       it { is_expected.to eq "hiragana" }
     end
 
+    context "when hiragana with yoon" do
+      let(:text) { "ちゃん" }
+
+      it { is_expected.to eq "chan" }
+    end
+
+    context "when hiragana with sokuon" do
+      let(:text) { "ざっし" }
+
+      it { is_expected.to eq "zasshi" }
+    end
+
+    context "when hiragana with sokuon before ku" do
+      let(:text) { "びっくり" }
+
+      it { is_expected.to eq "bikkuri" }
+    end
+
+    context "when hiragana with trailing sokuon" do
+      let(:text) { "あっ" }
+
+      it { is_expected.to eq "axtsu" }
+    end
+
+    context "when hiragana with sokuon before ascii" do
+      let(:text) { "あっa" }
+
+      it { is_expected.to eq "axtsua" }
+    end
+
+    context "when hiragana with sokuon before uppercase ascii" do
+      let(:text) { "あっA" }
+
+      it { is_expected.to eq "axtsuA" }
+    end
+
     context "when romaji with number" do
       let(:text) { "romaji01234" }
 
@@ -117,19 +153,19 @@ RSpec.describe "format" do
     context "when hiragana with kanji" do
       let(:text) { "ひらがな漢字" }
 
-      it { is_expected.to eq "hiragana" }
+      it { is_expected.to eq "hiragana漢字" }
     end
 
     context "when hiragana with romaji and kanji" do
       let(:text) { "ひらがな漢字mix" }
 
-      it { is_expected.to eq "hiragana" }
+      it { is_expected.to eq "hiragana漢字mix" }
     end
 
     context "when hiragana with special character" do
       let(:text) { "ひらがな！" }
 
-      it { is_expected.to eq "hiragana" }
+      it { is_expected.to eq "hiragana！" }
     end
   end
 end
